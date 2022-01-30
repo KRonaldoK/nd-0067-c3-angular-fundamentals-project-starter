@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Configuration
 
-Run `npm install` at the root directory of the "My Store App" project
+Run `npm install` at the root directory of the "My Store App" project (<project_directory>/my-store-app)
 
 ## Development server
 
