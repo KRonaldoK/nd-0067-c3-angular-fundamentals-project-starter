@@ -43,9 +43,10 @@ export class ShoppingCartComponent implements OnInit {
     this.calculateTotalPrice()
   }
 
-  removeFromShoppingcart(productItem: ProductItem){
+  removeFromShoppingCart(productItem: ProductItem){
     this.shoppingCartService.removeFromShoppingCart(productItem)
     this.calculateTotalPrice()
+    alert(`Product ${productItem.product.name} was removed from cart`)
   }
 
   getFullName(): string {
