@@ -11,6 +11,7 @@ export class ProductItemComponent implements OnInit {
   @Input() product: Product
   @Output() added = new EventEmitter()
 
+  quantityList = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   quantity: number
 
   constructor() {
@@ -25,10 +26,6 @@ export class ProductItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  onSelect(quantity: number) {
-    this.quantity = quantity
   }
 
   onAddProduct(product: Product){

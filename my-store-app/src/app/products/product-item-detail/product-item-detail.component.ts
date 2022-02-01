@@ -15,6 +15,7 @@ export class ProductItemDetailComponent implements OnInit {
   id: number = 0
   product: Product
   quantity: number = 1
+  quantityList = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
   constructor(private productService: ProductService, private shoppingCartService: ShoppingCartService, private router: Router, private activeRouter: ActivatedRoute) {
     this.activeRouter.paramMap.subscribe((params: ParamMap) => {
@@ -39,12 +40,9 @@ export class ProductItemDetailComponent implements OnInit {
     )
   }
 
-  onSelect(quantity: number){
-    this.quantity = quantity
-  }
-
   addToShoppingCart(product: Product): void {
     this.shoppingCartService.addToShoppingCart(new ProductItem(product, this.quantity))
+    alert(`Product ${product.name} was added to the shopping cart using quantity ${this.quantity}`)
   }
 
 }

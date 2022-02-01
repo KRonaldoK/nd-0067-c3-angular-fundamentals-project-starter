@@ -22,7 +22,10 @@ export class ProductListComponent implements OnInit {
   }
 
   onAdded(productItem: ProductItem): void {
+
     this.shoppingCartService.addToShoppingCart(productItem)
+    alert(`Product ${productItem.product.name} was added to the shopping cart using quantity ${productItem.quantity}`)
+
   }
 
 }

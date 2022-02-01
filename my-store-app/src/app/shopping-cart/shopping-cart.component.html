@@ -1,5 +1,5 @@
-
 <div class="cart-container">
+
       <div class="cart-panel">
             <div *ngFor="let productItem of shoppingCartList">
                 <div class="cart-item">
@@ -7,34 +7,53 @@
                   <div class="cart-item-details">
                       <p><strong>{{productItem.product.name}}</strong></p>
                       <p>{{productItem.product.price}}</p>
-                      <div style="display: inline"><label>Amount: </label><input type="number" id="quantity" name="quantity" min="1" max="9" [(ngModel)]="productItem.quantity" (change)="onChangeQuantity()"></div>
+                      <div style="display: inline"><label>Amount: </label><input type="number" id="quantity" name="quantity" min="1" max="9" [(ngModel)]="productItem.quantity" (ngModelChange)="onChangeQuantity()"></div>
+                      <p><button (click)="removeFromShoppingcart(productItem)">Remove</button></p>
                   </div>
                 </div>
             </div>
             <div class="empty-cart-message" *ngIf="shoppingCartList.length === 0">Empty cart</div>
             <h3><div *ngIf="totalPrice > 0" class="price">Total: {{totalPrice}}</div></h3>
-            <!--<button (click)="clearShoppingCart()">Reset cart</button>-->
       </div>
 
       <form class="form-margin" #form="ngForm" *ngIf="shoppingCartList.length > 0" (ngSubmit)="onSubmit()">
         <h3>Full name</h3>
-        <input type="text" name="name" required minlength="3" placeholder="(minimum 3 characters)" [(ngModel)]="fullName" #fullNameInput="ngModel" >
+        <input type="text" name="fullNameinput" id="fullNameinput" required minlength="3" placeholder="(minimum 3 characters)" [(ngModel)]="fullName" #fullNameInput="ngModel">
+            <div *ngIf="fullNameInput.invalid && fullNameInput.dirty">
+              <div *ngIf="fullNameInput.errors?.['required']">
+                <p>Please provide the full name.</p>
+              </div>
+              <div *ngIf="fullNameInput.errors?.['minlength']">
+                <p>The full name must contain at least 3 characters.</p>
+              </div>
+            </div>
         <h3>Address</h3>
-        <input type="text" name="address" required minlength="6" placeholder="(minimum 6 characters)" [(ngModel)]="address" >
+        <input type="text" name="addressInput" id="addressInput" required minlength="6" placeholder="(minimum 6 characters)" [(ngModel)]="address" #addressInput="ngModel">
+            <div *ngIf="addressInput.invalid && addressInput.dirty">
+              <div *ngIf="addressInput.errors?.['required']">
+                <p>Please provide the address.</p>
+              </div>
+              <div *ngIf="addressInput.errors?.['minlength']">
+                <p>The address must contain at least 6 characters.</p>
+              </div>
+            </div>
         <h3>Credit card number</h3>
-        <input class="number-input" type="text" name="creditCard" required minlength="16" maxlength="16" placeholder="(16-digit-number)" [(ngModel)]="creditCard" >
+        <input class="number-input" type="text" name="creditCardInput" id="creditCardInput" required minlength="16" maxlength="16" placeholder="(16-digit-number)" pattern="[0-9]{16}" [(ngModel)]="creditCard" #creditCardInput="ngModel">
+            <div *ngIf="creditCardInput.invalid && creditCardInput.dirty">
+              <div *ngIf="creditCardInput.errors?.['required']">
+                <p>Please provide the credit card number.</p>
+              </div>
+              <div *ngIf="creditCardInput.errors?.['minlength'] || creditCardInput.errors?.['maxlength']">
+                <p>The credit card number must contain 16 characters.</p>
+              </div>
+              <div *ngIf="creditCardInput.errors?.['pattern'] || creditCardInput.errors?.['maxlength']">
+                <p>The credit card number must only contain numbers.</p>
+              </div>
+            </div>
         <p>We'll never share your payment details with anyone else.</p>
 
         <button [disabled]="form.invalid" type="submit">Submit</button>
 
-        <div *ngIf="fullNameInput.invalid && fullNameInput.dirty">
-          <div *ngIf="fullNameInput.errors?.['required']">
-            Please provide the full name.
-          </div>
-          <div *ngIf="fullNameInput.errors?.['minLength']">
-            The full name must contain at least 3 characters.
-          </div>
-        </div>
       </form>
 
 </div>

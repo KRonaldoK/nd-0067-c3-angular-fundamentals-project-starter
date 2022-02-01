@@ -7,17 +7,9 @@
           <p><strong>${{product.price}}</strong></p>
           <p><strong>{{product.description }}</strong></p>
           <p>
-                <select class="select-input" name="quantity" id="quantity" (change)="onSelect($any($event).target.value)">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                </select>
+            <select class="select-input" name="quantity" id="quantity" [(ngModel)]="quantity">
+              <option *ngFor="let quantity of quantityList" [value]="quantity">{{quantity}}</option>
+            </select>
           </p>
           <p><button (click)="addToShoppingCart(product)">Add to cart</button></p>
           <a class="back-link" routerLink="/">&#8592; Back to product list</a>

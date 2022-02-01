@@ -39,6 +39,12 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   onChangeQuantity(): void {
+    alert('Shopping cart updated')
+    this.calculateTotalPrice()
+  }
+
+  removeFromShoppingcart(productItem: ProductItem){
+    this.shoppingCartService.removeFromShoppingCart(productItem)
     this.calculateTotalPrice()
   }
 
